@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loba Drinks - Licores Artesanais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f0a1a;
+            --secondary: #6b4fa0;
+            --accent: #d4a574;
+            --text-light: #e0e0e0;
+            --text-dark: #1a1a1a;
+            --border-color: #2a2a3a;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(15, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 48px;
+            width: 48px;
+            object-fit: contain;
+        }
+
+        .brand-text h2 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin: 0;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            color: #999;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Header Banner */
+        .header-banner {
+            margin-top: 80px;
+            width: 100%;
+            height: auto;
+        }
+
+        .header-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #1a0f2e 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(107, 79, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #c9a0e0;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: #999;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: #a78bcc;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 640px) {
+            .button-group {
+                flex-direction: row;
+            }
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--text-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #e5b88a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(212, 165, 116, 0.1);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        section.bg-dark {
+            background-color: var(--primary);
+        }
+
+        section.bg-card {
+            background-color: #1a1a2e;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .divider {
+            height: 2px;
+            width: 128px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 0 auto 4rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: rgba(107, 79, 160, 0.1);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            border-color: rgba(212, 165, 116, 0.5);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .product-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-emoji {
+            transform: scale(1.1);
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-flavor {
+            font-size: 0.875rem;
+            color: #c9a0e0;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            font-size: 0.875rem;
+            color: #999;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .product-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #d4a574, #c9a0e0);
+            border-radius: 2px;
+        }
+
+        /* Use Cases Grid */
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .usecase-card {
+            background: rgba(107, 79, 160, 0.1);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .usecase-card:hover {
+            border-color: rgba(212, 165, 116, 0.5);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        .usecase-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .usecase-title {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .usecase-description {
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-card {
+            background: rgba(107, 79, 160, 0.1);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-title {
+            font-size: 1.125rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-text {
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(107, 79, 160, 0.3) 0%, rgba(212, 165, 116, 0.1) 100%);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            color: #999;
+        }
+
+        .highlight-box .accent-text {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            height: 300px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6b4fa0, #d4a574);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-content h3 {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact-content a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-content a:hover {
+            color: var(--accent);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background-color: #1a1a2e;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            color: var(--text-light);
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: none;
+            min-height: 150px;
+        }
+
+        /* Legal Notice */
+        .legal-notice {
+            background-color: #1a1a2e;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .legal-text {
+            font-size: 0.875rem;
+            color: #d4a574;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 64px;
+            width: 64px;
+            margin: 0 auto 1rem;
+            object-fit: contain;
+        }
+
+        .footer-brand {
+            font-size: 1.125rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-subtitle {
+            font-size: 0.875rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-description {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.875rem;
+            color: #c9a0e0;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo-section">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663480313480/U4VnXXExFp2Dy72m3UA86A/loba-logo-transparent-WpG4PxVwzJBw4dayTreuEM.webp"
+                        alt="Loba Drinks Logo" class="logo-img">
+                    <div class="brand-text">
+                        <h2>Loba Drinks</h2>
+                        <p>Alquimia & Coquetilaria</p>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="#products">Produtos</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#contact">Contato</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663480313480/U4VnXXExFp2Dy72m3UA86A/loba-header-new_fbf30de0.png"
+            alt="Loba Drinks Header">
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Alquimia & Coquetilaria</p>
+                <p class="hero-description">Licores Artesanais Cremosos, Intensos e Irresistíveis</p>
+                <p class="hero-tagline">Descubra sabores únicos criados com ingredientes selecionados e produção
+                    artesanal</p>
+                <div class="button-group">
+                    <a href="https://wa.me/5511951253897?text=Olá! Gostaria de conhecer os licores da Loba Drinks"
+                        class="btn btn-primary" target="_blank">🛒 Peça Agora</a>
+                    <a href="#products" class="btn btn-secondary">Conheça os Sabores</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="bg-dark">
+        <div class="container">
+            <h2 class="section-title">Nossos <span>Sabores</span></h2>
+            <p style="text-align: center; color: #999; margin-bottom: 1rem;">Licores Artesanais Exclusivos</p>
+            <div class="divider"></div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🥥</span>
+                    <h3 class="product-name">Rafaello</h3>
+                    <p class="product-flavor">Tropical, delicado e marcante</p>
+                    <p class="product-description">Licor cremoso com notas de coco e amêndoa</p>
+                    <div class="product-bar"></div>
+                </div>
+
+                <div class="product-card">
+                    <span class="product-emoji">🍫</span>
+                    <h3 class="product-name">🐺 Uivo de Cacau</h3>
+                    <p class="product-flavor">Licor Artesanal de Chocolate Intenso</p>
+                    <p class="product-description">A força do chocolate em sua forma mais pura e potente. Base de
+                        chocolate 50% cacau com textura aveludada.</p>
+                    <div class="product-bar"></div>
+                </div>
+
+                <div class="product-card">
+                    <span class="product-emoji">🍮</span>
+                    <h3 class="product-name">Doce de Leite</h3>
+                    <p class="product-flavor">Aconchegante e irresistível</p>
+                    <p class="product-description">Licor cremoso com doce de leite artesanal</p>
+                    <div class="product-bar"></div>
+                </div>
+
+                <div class="product-card">
+                    <span class="product-emoji">🍯</span>
+                    <h3 class="product-name">Maracujá Trufado</h3>
+                    <p class="product-flavor">Equilíbrio perfeito entre doce</p>
+                    <p class="product-description">Licor com maracujá e trufa belga</p>
+                    <div class="product-bar"></div>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: #999; margin-bottom: 2rem; font-size: 1.125rem;">✨ E outros sabores
+                exclusivos! ✨</p>
+
+            <div style="text-align: center;">
+                <a href="https://wa.me/5511951253897?text=Olá! Gostaria de provar os licores da Loba Drinks!"
+                    class="btn btn-primary" target="_blank">🛒 Peça Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="bg-card">
+        <div class="container">
+            <h2 class="section-title">Perfeito <span>Para</span></h2>
+            <div class="divider"></div>
+
+            <div class="usecases-grid">
+                <div class="usecase-card">
+                    <span class="usecase-emoji">🎁</span>
+                    <h3 class="usecase-title">Presentear</h3>
+                    <p class="usecase-description">Presente sofisticado e memorável</p>
+                </div>
+
+                <div class="usecase-card">
+                    <span class="usecase-emoji">🎉</span>
+                    <h3 class="usecase-title">Eventos</h3>
+                    <p class="usecase-description">Coquetéis e drinks especiais</p>
+                </div>
+
+                <div class="usecase-card">
+                    <span class="usecase-emoji">✨</span>
+                    <h3 class="usecase-title">Momentos Especiais</h3>
+                    <p class="usecase-description">Celebre com estilo e exclusividade</p>
+                </div>
+
+                <div class="usecase-card">
+                    <span class="usecase-emoji">🧊</span>
+                    <h3 class="usecase-title">Degustar Bem Gelado</h3>
+                    <p class="usecase-description">Aprecie a qualidade artesanal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-dark">
+        <div class="container">
+            <h2 class="section-title">Sobre a <span>Loba Drinks</span></h2>
+            <div class="divider"></div>
+
+            <p
+                style="text-align: center; max-width: 600px; margin: 0 auto 2rem; font-size: 1.125rem; color: #999; line-height: 1.8;">
+                A Loba Drinks é especializada em criar <span style="color: var(--accent); font-weight: bold;">licores
+                    artesanais</span> de qualidade premium. Cada garrafa é resultado de uma cuidadosa seleção de
+                ingredientes e produção artesanal que respeita a tradição e a inovação.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <span class="about-emoji">🧪</span>
+                    <h3 class="about-title">Alquimia</h3>
+                    <p class="about-text">Combinação perfeita de ingredientes selecionados</p>
+                </div>
+
+                <div class="about-card">
+                    <span class="about-emoji">🍷</span>
+                    <h3 class="about-title">Qualidade</h3>
+                    <p class="about-text">Produção artesanal com padrão premium</p>
+                </div>
+
+                <div class="about-card">
+                    <span class="about-emoji">❤️</span>
+                    <h3 class="about-title">Paixão</h3>
+                    <p class="about-text">Feito com o coração da alcateia</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p>Cada licor é uma celebração de sabor, qualidade e dedicação.</p>
+                <p class="accent-text" style="font-style: italic;">🐺 "Feito com o coração da alcateia" ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="bg-card">
+        <div class="container">
+            <h2 class="section-title"><span>Galeria</span> de Licores</h2>
+            <div class="divider"></div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663480313480/U4VnXXExFp2Dy72m3UA86A/loba-drinks-showcase-7t5s32wGM26RBiwoTsxp8j.webp"
+                        alt="Licores showcase">
+                    <div class="gallery-overlay"></div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663480313480/U4VnXXExFp2Dy72m3UA86A/loba-events-celebration-UCqTVcitjVrZQwgFLyFw6N.webp"
+                        alt="Celebração com licores">
+                    <div class="gallery-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uivo de Cacau Details Section -->
+    <section class="bg-dark">
+        <div class="container">
+            <h2 class="section-title"><span>🐺 Uivo de Cacau</span></h2>
+            <div class="divider"></div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p
+                    style="font-size: 1.25rem; color: var(--accent); font-weight: bold; text-align: center; margin-bottom: 2rem;">
+                    Licor Artesanal de Chocolate Intenso</p>
+
+                <p
+                    style="font-size: 1.125rem; color: #c9a0e0; text-align: center; margin-bottom: 2rem; font-style: italic;">
+                    A forca do chocolate em sua forma mais pura e potente.
+                </p>
+
+                <div class="highlight-box" style="margin-bottom: 2rem;">
+                    <p style="font-size: 1rem; color: #999; line-height: 1.8; margin-bottom: 1rem;">
+                        O Uivo de Cacau e a nossa traducao liquida para o misterio e a intensidade da noite.
+                        Desenvolvido com uma base de chocolate 50% cacau, este licor artesanal foge do obvio: ele nao e
+                        apenas doce, ele e profundo.
+                    </p>
+                    <p style="font-size: 1rem; color: #999; line-height: 1.8;">
+                        Criado a partir da expertise em gastronomia da nossa alcateia, o Uivo de Cacau entrega uma
+                        textura aveludada que abraca o paladar, equilibrando perfeitamente o amargor sofisticado do
+                        cacau com a potencia da nossa base alcoolica premium.
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <a href="https://wa.me/5511951253897?text=Ola! Gostaria de provar o Uivo de Cacau!"
+                        class="btn btn-primary" target="_blank">🛒 Solicite Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-dark">
+        <div class="container">
+            <h2 class="section-title">Entre em <span>Contato</span></h2>
+            <div class="divider"></div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-content">
+                            <h3>WhatsApp</h3>
+                            <a href="https://wa.me/5511951253897" target="_blank">(11) 95125-3897</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-content">
+                            <h3>Email</h3>
+                            <a href="mailto:lobadrinks@gmail.com">lobadrinks@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-content">
+                            <h3>Localização</h3>
+                            <p style="color: #999;">São Paulo - SP</p>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                        <p style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">Siga-nos nas redes:</p>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="https://instagram.com/loba_drinks" target="_blank"
+                                style="color: var(--accent); text-decoration: none; font-size: 1.5rem; transition: color 0.3s ease;"
+                                onmouseover="this.style.color='#e5b88a'"
+                                onmouseout="this.style.color='var(--accent)'">📱</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">🛒 Enviar via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Notice -->
+    <section class="legal-notice">
+        <div class="container">
+            <p class="legal-text">⚠️ Beba com responsabilidade. Venda proibida para menores de 19 anos.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663480313480/U4VnXXExFp2Dy72m3UA86A/loba-logo-transparent-WpG4PxVwzJBw4dayTreuEM.webp"
+                alt="Loba Drinks Logo" class="footer-logo">
+            <p class="footer-brand">Loba Drinks</p>
+            <p class="footer-subtitle">Alquimia & Coquetilaria</p>
+            <p class="footer-copyright">© 2024 Loba Drinks. Todos os direitos reservados.</p>
+            <p class="footer-description">Licores Artesanais Cremosos, Intensos e Irresistíveis</p>
+            <p class="footer-tagline">🐺 "Feito com o coração da alcateia" ✨</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const whatsappMessage = `Olá! Meu nome é ${name}. ${message}`;
+            const whatsappUrl = `https://wa.me/5511951253897?text=${encodeURIComponent(whatsappMessage)}`;
+
+            window.open(whatsappUrl, '_blank');
+
+            // Reset form
+            event.target.reset();
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
